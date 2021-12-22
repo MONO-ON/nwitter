@@ -7,7 +7,7 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider
 } from "@firebase/auth";
-import { authService, firebaseInstance } from "fbase";
+import { authService } from "fbase";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
