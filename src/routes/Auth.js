@@ -10,6 +10,9 @@ import {
 import { authService } from "fbase";
 
 const Auth = () => {
+  // value값을 가져와서 쓰기 위해, State를 사용한다.
+  // useState는 Hook이다. 훅을 호출해 함수 컴포넌트 안에 state를 추가한다.
+  // 이 state는 컴포넌트가 다시 랜더링 되어도 그대로 유지된다.
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(true);
@@ -25,6 +28,7 @@ const Auth = () => {
     }
   };
   const onSubmit = async (event) => {
+    // 기본 행위가 실행되는 것을 원치 않는다는 것. => 페이지가 새로고침 되지 않는다.
     event.preventDefault();
     try {
       let data;
@@ -60,6 +64,7 @@ const Auth = () => {
           type="email"
           placeholder="Email"
           required
+          // value값을 얻어내서 사용할 것이다.
           value={email}
           onChange={onChange}
         />
@@ -68,6 +73,7 @@ const Auth = () => {
           type="password"
           placeholder="Password"
           required
+          // value값을 얻어내서 사용할 것이다.
           value={password}
           onChange={onChange}
         />

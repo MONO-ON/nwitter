@@ -12,14 +12,14 @@ const Nweet = ({ nweetObj, isOwner }) => {
   const onDeleteClick = async () => {
       // 먼저 유저를 확인하고, nweet을 지우길 원하는지 확인한다.
     const ok = window.confirm("Are you sure you want to delete this nweet?");
-    // 확인을 누르면, ok는 true가 된다.
+    // 확인을 누르면, ok는 true
     if (ok) {
       await deleteDoc(doc(dbService, `nweets/${nweetObj.id}`));
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
   const onSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     await updateDoc(doc(dbService, `nweets/${nweetObj.id}`), {
       text: newNweet,
     });
@@ -30,7 +30,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
       target: { value },
     } = event;
     setNewNweet(value);
-  }
+  };
   return (
     <div>
       {/* 수정하고 있으면, form을 보여준다. */}

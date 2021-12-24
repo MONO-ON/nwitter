@@ -30,7 +30,6 @@ export default function App() {
   return (
     <>
       {init ? <AppRouter /* isLoggedIn={isLoggedIn} */ isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "Initializing..."}
-      <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
     </>
   );
 }
