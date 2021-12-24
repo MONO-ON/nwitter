@@ -33,6 +33,8 @@ const Home = ({ userObj }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+    await fileRef.putSt
+
     // collection에 document(데이터)를 추가해준다.
     /* await firestore.addDoc(firestore.collection(dbService, "nweets"), {
       text: nweet,
