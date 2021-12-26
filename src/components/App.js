@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from "components/Router";
 import { authService } from "fbase";
+import { updateProfile } from "firebase/auth";
 
 export default function App() {
   const [init, setInit] = useState(false);
@@ -19,17 +20,39 @@ export default function App() {
       if (user) {
         // user를 얻어야 로그인이 된다.
         /* setIsLoggedIn(true); */
-        setUserObj(user);
+        // 우리가 원하는 firebase의 특정 부분만을 가져와서 react한테 줄 수 있다.
+        setUserObj({
+          displayName: user.displayName,
+          uid: user.uid,
+          updateProfile: (args) => updateProfile(user, { displayName: user.displayName}),
+        });
       } else {
         // 어떤 user도 받지 못하면 로그인할 수 없다.
         /* setIsLoggedIn(false); */
+        setUserObj(null);
       }
       setInit(true);
     });
-  }, [])
+  }, []);
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      uid: user.uid,
+      updateProfile: (args) => user.updateProfile(args),
+    });
+  };
   return (
     <>
-      {init ? <AppRouter /* isLoggedIn={isLoggedIn} */ isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "Initializing..."}
+      {init ? (
+        <AppRouter
+          /* isLoggedIn={isLoggedIn} */ refreshUser={refreshUser}
+          isLoggedIn={Boolean(userObj)}
+          userObj={userObj}
+        />
+      ) : (
+        "Initializing..."
+      )}
     </>
   );
 }
